@@ -13,6 +13,18 @@ const getCards = (req: Request, res: Response, next: NextFunction) => {
     .catch(next);
 };
 
+const getBestCards = (req: Request, res: Response, next: NextFunction) => {
+  Card.find(/* Выбор фотографий с большим количеством лайков за последнее время */)
+    .then((cards) => res.send({ data: cards }))
+    .catch(next);
+};
+
+const getRecommendedCards = (req: Request, res: Response, next: NextFunction) => {
+  Card.find(/* Выбор фотографий на основе пользовательских предпочтений */)
+    .then((cards) => res.send({ data: cards }))
+    .catch(next);
+};
+
 const createCard = (req: Request, res: Response, next: NextFunction) => {
   const owner = req.user._id;
   const { name, link } = req.body;
@@ -59,4 +71,5 @@ const dislikeCard = (req: Request, res: Response, next: NextFunction) => updateL
 export {
   createCard,
   deleteCard, dislikeCard, getCards, likeCard,
+  getBestCards, getRecommendedCards,
 };
