@@ -57,6 +57,10 @@ module.exports = (_, argv) => ({
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.svg$/, 
+        use: ['@svgr/webpack'],
+      },
     ],
   },
 
@@ -66,6 +70,7 @@ module.exports = (_, argv) => ({
       filename: "remoteEntry.js",
       remotes: {
         'Auth': 'Auth@http://localhost:8082/remoteEntry.js',
+        // 'Login': 'Login@http://localhost:8082/remoteEntry.js',
       },
       exposes: {},
       shared: {
